@@ -25,7 +25,7 @@ function LoginForm() {
 				</div>
 			</div>
 
-			<div className="w-full bg-bgColorButtton duration-300 transition hover:bg-bgColorButttonHover felx flex-col justify-center items-center rounded-sm mt-4 text-center">
+			<div className="w-full bg-bgColorButtton duration-300 transition hover:bg-bgColorButttonHover felx flex-col justify-center items-center rounded-sm mt-8 text-center">
 				<button className="w-full text-lg tracking-wide text-secondWhite font-semibold  py-1.5 px-3">
 					Log in
 				</button>

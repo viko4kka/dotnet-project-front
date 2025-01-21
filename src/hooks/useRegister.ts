@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { register as registerApi } from "../services/apiAuth";
+import { registerUser as registerUserApi } from "../services/apiAuth";
 
 export function useRegister() {
 	const navigate = useNavigate();
 
-	const { mutate: register, isLoading } = useMutation({
-		mutationFn: registerApi,
+	const { mutate: registerUser, isLoading } = useMutation({
+		mutationFn: registerUserApi,
 		onSuccess: () => {
 			toast.success("User successfully created!");
 			navigate("/login");
@@ -18,5 +18,5 @@ export function useRegister() {
 		},
 	});
 
-	return { register, isLoading };
+	return { registerUser, isLoading };
 }
