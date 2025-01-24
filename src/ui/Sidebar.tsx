@@ -4,7 +4,9 @@ import { IoCarSportOutline } from "react-icons/io5";
 
 import { NavLink } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ data }) {
+	console.log(data);
+
 	return (
 		<div className="bg-mainBgColor shadow-xl w-[330px] flex flex-col items-center justify-between h-screen">
 			<div className="h-screen flex flex-col items-center justify-between py-16 px-12 w-full">
@@ -21,18 +23,33 @@ function Sidebar() {
 							</p>
 						</NavLink>
 					</button>
-					<button className="group w-full">
-						<NavLink
-							to="/dashboard/reservations"
-							className="flex flex-row items-center space-x-2 py-3 px-3 group-hover:bg-bgColorButttonHover/30 w-full transition-all duration-300">
-							<span className="text-2xl px-3 text-secondWhite  transition-all duration-300 ">
-								<HiOutlineCalendarDays />
-							</span>
-							<p className="text-2xl rounded text-secondWhite  transition-all duration-300">
-								Reservations
-							</p>
-						</NavLink>
-					</button>
+					{data?.role === "Admin" ? (
+						<button className="group w-full">
+							<NavLink
+								to="/dashboard/reservations"
+								className="flex flex-row items-center space-x-2 py-3 px-3 group-hover:bg-bgColorButttonHover/30 w-full transition-all duration-300">
+								<span className="text-2xl px-3 text-secondWhite transition-all duration-300">
+									<HiOutlineCalendarDays />
+								</span>
+								<p className="text-2xl rounded text-secondWhite transition-all duration-300">
+									Reservations
+								</p>
+							</NavLink>
+						</button>
+					) : (
+						<button className="group w-full">
+							<NavLink
+								to="/dashboard/my-reservations"
+								className="flex flex-row items-center space-x-2 py-3 px-3 group-hover:bg-bgColorButttonHover/30 w-full transition-all duration-300">
+								<span className="text-2xl px-3 text-secondWhite transition-all duration-300">
+									<HiOutlineCalendarDays />
+								</span>
+								<p className="text-2xl rounded text-secondWhite transition-all duration-300">
+									My Reservations
+								</p>
+							</NavLink>
+						</button>
+					)}
 					<button className="group w-full">
 						<NavLink
 							to="/dashboard/settings"
