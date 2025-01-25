@@ -19,14 +19,14 @@ function Dashboard() {
 		<div className="flex bg-secondWhite h-screen">
 			{isLoading ? (
 				<div className="flex items-center justify-center w-full h-full">
-					<BarLoader color="#E97510" />
+					<BarLoader color="#43378F" />
 				</div>
 			) : (
 				<>
 					<Sidebar data={data} />
 					<div className="flex flex-col flex-grow">
 						<Header />
-						<div className="flex-grow p-4">
+						<div className="flex-grow p-4 bg-inputBgColor">
 							<Outlet />
 						</div>
 					</div>

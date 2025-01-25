@@ -3,9 +3,12 @@ import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { IoCarSportOutline } from "react-icons/io5";
 
 import { NavLink } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
 
 function Sidebar({ data }) {
 	console.log(data);
+
+	const { logout } = useLogout();
 
 	return (
 		<div className="bg-mainBgColor shadow-xl w-[330px] flex flex-col items-center justify-between h-screen">
@@ -64,7 +67,9 @@ function Sidebar({ data }) {
 					</button>
 				</div>
 				<div className="group w-full">
-					<button className="flex flex-row items-center space-x-2 py-3 px-3 group-hover:bg-buttonLogOut/70 w-full transition-all duration-300">
+					<button
+						onClick={logout}
+						className="flex flex-row items-center space-x-2 py-3 px-3 group-hover:bg-buttonLogOut/70 w-full transition-all duration-300">
 						{" "}
 						<span className="text-2xl px-3 text-secondBlack group-hover:text-white transition-all duration-300">
 							<IoLogOutOutline />

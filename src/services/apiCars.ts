@@ -1,6 +1,14 @@
 const API_CAR_URL = "http://localhost:5093/api/car";
 
-export async function getCars() {
+interface Car {
+	brand: string;
+	bodyType: string;
+	fuelType: string;
+	pricePerDay: number;
+	status: string;
+}
+
+export async function getCars(): Promise<Car[]> {
 	try {
 		const response = await fetch(API_CAR_URL);
 

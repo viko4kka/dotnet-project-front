@@ -1,68 +1,100 @@
-// import { createContext, useContext } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createContext, ReactNode, useContext } from "react";
 
-// const TableContext = createContext();
+interface TableContextProps {
+	columns: string;
+}
 
-// function Table({ columns, children }) {
-// 	return (
-// 		<TableContext.Provider value={{ columns }}>
-// 			<div
-// 				role="table"
-// 				className="w-full  border border-borderTableColor/70 bg-rentalSearchBarFormBackground rounded-lg overflow-hidden">
-// 				{children}
-// 			</div>
-// 		</TableContext.Provider>
-// 	);
-// }
+const TableContext = createContext<TableContextProps | undefined>(undefined);
 
-// function Header({ children }) {
-// 	const { columns } = useContext(TableContext);
+interface TableProps {
+	columns: string;
+	children: ReactNode;
+}
 
-// 	return (
-// 		<div
-// 			role="row"
-// 			className={`text-center w-full grid px-2 py-3	 bg-rentalSearchBarFormBackground text-uppercase tracking-wider font-semibold text-secondWhite ${columns}`}>
-// 			{children}
-// 		</div>
-// 	);
-// }
+function Table({ columns, children }: TableProps) {
+	return (
+		<TableContext.Provider value={{ columns }}>
+			<div
+				role="table"
+				className="w-full  border border-borderTableColor/70 bg-rentalSearchBarFormBackground rounded-lg overflow-hidden">
+				{children}
+			</div>
+		</TableContext.Provider>
+	);
+}
 
-// function Row({ children }) {
-// 	const { columns } = useContext(TableContext);
+interface HeaderProps {
+	children: React.ReactNode;
+}
 
-// 	return (
-// 		<div
-// 			role="row"
-// 			className={`grid w-full  text-center py-4 px-2 border-y border-borderTableColor/70 last:border-b-0 ${columns}`}>
-// 			{children}
-// 		</div>
-// 	);
-// }
+function Header({ children }: HeaderProps) {
+	// const { columns } = useContext(TableContext);
 
-// function Body({ data, render }) {
-// 	if (!data || !data.length) return <div>No data to show at the moment</div>;
+	const context = useContext(TableContext);
 
-// 	return (
-// 		<div className="w-full bg-backgroundColor/50">
-// 			{data.map((item, index) => (
-// 				<section className="my-1" key={index}>
-// 					{render(item, index)}
-// 				</section>
-// 			))}
-// 		</div>
-// 	);
-// }
+	if (!context) return null;
 
-// function Footer({ children }) {
-// 	return (
-// 		<div className="w-full h-10 bg-rentalSearchBarFormBackground">
-// 			{children}
-// 		</div>
-// 	);
-// }
+	const { columns } = context;
 
-// Table.Header = Header;
-// Table.Row = Row;
-// Table.Body = Body;
-// Table.Footer = Footer;
+	return (
+		<div
+			role="row"
+			className={`text-center w-full grid px-2 py-3	 bg-rentalSearchBarFormBackground text-uppercase tracking-wider font-semibold text-secondWhite ${columns}`}>
+			{children}
+		</div>
+	);
+}
 
-// export default Table;
+interface RowProps {
+	children: React.ReactNode;
+}
+
+function Row({ children }: RowProps) {
+	// const { columns } = useContext(TableContext);
+	const context = useContext(TableContext);
+
+	if (!context) return null;
+
+	const { columns } = context;
+
+	return (
+		<div
+			role="row"
+			className={`grid w-full  text-center py-4 px-2 border-y border-borderTableColor/70 last:border-b-0 ${columns}`}>
+			{children}
+		</div>
+	);
+}
+
+interface BodyProps {
+	data: any[];
+	render: (item: any, index: number) => React.ReactNode;
+}
+
+function Body({ data, render }: BodyProps) {
+	if (!data || !data.length) return <div>No data to show at the moment</div>;
+
+	return (
+		<div className="w-full bg-backgroundColor/50">
+			{data.map((item, index) => (
+				<section className="my-1" key={index}>
+					{render(item, index)}
+				</section>
+			))}
+		</div>
+	);
+}
+
+function Footer() {
+	return (
+		<div className="w-full h-10 bg-secondWhite">fotter</div>
+	);
+}
+
+Table.Header = Header;
+Table.Row = Row;
+Table.Body = Body;
+Table.Footer = Footer;
+
+export default Table;
