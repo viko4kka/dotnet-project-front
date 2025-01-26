@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Cars from "./pages/Cars";
 import Reservations from "./pages/Reservations";
 import Settings from "./pages/Settings";
+import Car from "./pages/Car";
 
 //create a client
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ function App() {
 
 						<Route path="dashboard" element={<Dashboard />}>
 							<Route path="cars" element={<Cars />} />
+							<Route path="cars/:carId" element={<Car />} />
 							<Route path="reservations" element={<Reservations />} />
 							<Route path="settings" element={<Settings />} />
 						</Route>

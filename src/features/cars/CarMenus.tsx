@@ -6,6 +6,7 @@ import Modal from "../../ui/Modal";
 import CreateEditCarForm from "./CreateEditCarForm";
 import { useDeleteCar } from "../../hooks/useDeleteCar";
 import { BarLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 interface Car {
 	carId: number;
@@ -38,12 +39,17 @@ function CarMenus({
 	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [isDetaildModelOpen, setIsDetaildModelOpen] = useState(false);
 	const queryClient = useQueryClient();
+	const navigate = useNavigate();
 
 	const car = queryClient
 		.getQueryData<Car[]>(["cars"])
 		?.find((car) => car.carId === carId);
 
 	if (!car) return null;
+
+	const handleSeeDetails = () => {
+		navigate(`${carId}`);
+	};
 
 	const initialData = {
 		carId: car.carId,
@@ -72,7 +78,7 @@ function CarMenus({
 			className="absolute py-1 w-28 rounded-md shadow-lg bg-white"
 			style={{ top: `${yPos}px`, left: `${xPos}px` }}>
 			<button
-				onClick={() => setIsDetaildModelOpen(true)}
+				onClick={handleSeeDetails}
 				className="w-full text-left px-3 py-2 hover:bg-gray-200 flex items-center space-x-2 text-xs">
 				<HiEye />
 				<span>See details</span>

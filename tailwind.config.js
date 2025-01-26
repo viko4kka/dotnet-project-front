@@ -9,7 +9,8 @@ export default {
 				inputBgColor: "#3C364C",
 				bgColorButtton: "#43378F",
 				bgColorButttonHover: "#4D429E",
-				buttonLogOut: "#FF4040"
+				spanColor: "#9590BE",
+				buttonLogOut: "#FF4040",
 			},
 		},
 	},

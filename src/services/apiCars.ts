@@ -1,11 +1,17 @@
 const API_CAR_URL = "http://localhost:5093/api/car";
 
 interface Car {
+	carId: number;
 	brand: string;
 	bodyType: string;
 	fuelType: string;
 	pricePerDay: number;
 	status: string;
+	model: string; // Dodane pole
+	year: number; // Dodane pole
+	seats: number; // Dodane pole
+	color: string; // Dodane pole
+	imageUrl: string; // Dodane pole
 }
 
 export async function getCars(): Promise<Car[]> {
@@ -160,6 +166,29 @@ export async function deleteCar(carId: number): Promise<void> {
 		}
 	} catch (error) {
 		console.error("Error while deleting car", error);
+		throw error;
+	}
+}
+
+export async function getCarById(carId: number): Promise<Car> {
+	const getCarByIdOptions = {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	};
+
+	try {
+		const response = await fetch(`${API_CAR_URL}/${carId}`, getCarByIdOptions);
+
+		if (!response.ok) {
+			throw new Error("Error while fetching car by id");
+		}
+
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error("Error while fetching car by id", error);
 		throw error;
 	}
 }
