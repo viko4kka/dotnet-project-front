@@ -2,6 +2,8 @@ import AddCar from "../features/cars/AddCar";
 import CarTable from "../features/cars/CarTable";
 
 function Cars() {
+	const role = localStorage.getItem("role");
+
 	return (
 		<>
 			<div className="w-full flex flex-col justify-center items-center mt-8">
@@ -11,9 +13,12 @@ function Cars() {
 				<div className="flex-1 mt-10 overflow-auto w-full px-10">
 					<CarTable />
 				</div>
-				<div className="flex flex-row items-center justify-end w-full mt-6 px-10">
-					<AddCar />
-				</div>
+
+				{role === "Admin" && (
+					<div className="flex flex-row items-center justify-end w-full mt-6 px-10">
+						<AddCar />
+					</div>
+				)}
 			</div>
 		</>
 	);

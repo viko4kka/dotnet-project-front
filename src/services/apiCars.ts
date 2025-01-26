@@ -55,10 +55,13 @@ export async function addCar({
 	status,
 	imageUrl,
 }: AddCarProps): Promise<void> {
+	const token = localStorage.getItem("token");
+
 	const addCarOptions = {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({
 			brand,
@@ -116,10 +119,13 @@ export async function updateCar({
 	status,
 	imageUrl,
 }: UpdateCarProps): Promise<void> {
+	const token = localStorage.getItem("token");
+
 	const updateOptions = {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({
 			brand,
@@ -151,10 +157,13 @@ export async function updateCar({
 }
 
 export async function deleteCar(carId: number): Promise<void> {
+	const token = localStorage.getItem("token");
+
 	const deleteOptions = {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
+			Authorization: `Bearer ${token}`,
 		},
 	};
 

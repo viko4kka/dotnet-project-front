@@ -31,6 +31,7 @@ function LoginForm() {
 				</div>
 				<div className="w-full">
 					<input
+						type="password"
 						value={password} //to sie nazywa controlled input
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Enter your password"
